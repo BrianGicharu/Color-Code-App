@@ -7,6 +7,10 @@ package color.code.app;
 
 import java.awt.Color;
 
+import java.awt.datatransfer.StringSelection;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+
 /**
  *
  * @author user
@@ -47,7 +51,7 @@ public class ColorCodeApp extends javax.swing.JFrame {
         cSliderLabel = new javax.swing.JLabel();
         scrollPane = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
-        okayResetButton = new javax.swing.JButton();
+        copyBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,11 +59,23 @@ public class ColorCodeApp extends javax.swing.JFrame {
 
         jLabelA.setText("R");
 
-        jLabelC.setText("B");
+        jLabelC.setText("C");
 
-        aInputTextBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                aInputTextBoxPropertyChange(evt);
+        aInputTextBox.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                aInputTextBoxStateChanged(evt);
+            }
+        });
+
+        bInputTextBox.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                bInputTextBoxStateChanged(evt);
+            }
+        });
+
+        cInputTextBox.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                cInputTextBoxStateChanged(evt);
             }
         });
 
@@ -71,6 +87,11 @@ public class ColorCodeApp extends javax.swing.JFrame {
         });
 
         fgColorRadioBtn.setText("ForeGround Color");
+        fgColorRadioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fgColorRadioBtnActionPerformed(evt);
+            }
+        });
 
         colorLabel.setBackground(new java.awt.Color(255, 255, 255));
         colorLabel.setOpaque(true);
@@ -118,10 +139,11 @@ public class ColorCodeApp extends javax.swing.JFrame {
         textArea.setWrapStyleWord(true);
         scrollPane.setViewportView(textArea);
 
-        okayResetButton.setText("OK");
-        okayResetButton.addActionListener(new java.awt.event.ActionListener() {
+        copyBtn.setText("COPY");
+        copyBtn.setActionCommand("COPY");
+        copyBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okayResetButtonActionPerformed(evt);
+                copyBtnActionPerformed(evt);
             }
         });
 
@@ -139,7 +161,7 @@ public class ColorCodeApp extends javax.swing.JFrame {
                                     .addComponent(cSliderLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(bSliderLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                                     .addComponent(aSliderLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 93, Short.MAX_VALUE))
+                                .addGap(0, 81, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(aInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,7 +182,7 @@ public class ColorCodeApp extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                                .addComponent(okayResetButton)
+                                .addComponent(copyBtn)
                                 .addContainerGap())))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +211,7 @@ public class ColorCodeApp extends javax.swing.JFrame {
                     .addComponent(aInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(okayResetButton))
+                    .addComponent(copyBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(aSliderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -235,14 +257,6 @@ public class ColorCodeApp extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bgColorRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bgColorRadioBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bgColorRadioBtnActionPerformed
-
-    private void okayResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okayResetButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_okayResetButtonActionPerformed
-
-    private void aSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_aSliderStateChanged
         aInputTextBox.setValue(aSlider.getValue());
         bInputTextBox.setValue(bSlider.getValue());
         cInputTextBox.setValue(cSlider.getValue());
@@ -255,7 +269,14 @@ public class ColorCodeApp extends javax.swing.JFrame {
             textArea.setForeground(new Color((Integer)aInputTextBox.getValue(),
                     (Integer)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
         }
-    }//GEN-LAST:event_aSliderStateChanged
+    }//GEN-LAST:event_bgColorRadioBtnActionPerformed
+
+    private void copyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyBtnActionPerformed
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(new StringSelection(
+                "["+aInputTextBox.getValue()+", "+bInputTextBox.getValue()
+                        +", "+cInputTextBox.getValue()+"]"), null);
+    }//GEN-LAST:event_copyBtnActionPerformed
 
     private void bSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_bSliderStateChanged
         aInputTextBox.setValue(aSlider.getValue());
@@ -287,19 +308,77 @@ public class ColorCodeApp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cSliderStateChanged
 
-    private void aInputTextBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_aInputTextBoxPropertyChange
+    private void aSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_aSliderStateChanged
+        aInputTextBox.setValue(aSlider.getValue());
+        bInputTextBox.setValue(bSlider.getValue());
+        cInputTextBox.setValue(cSlider.getValue());
+
+        if(bgColorRadioBtn.isSelected()){
+            colorLabel.setBackground(new Color((int)aInputTextBox.getValue(),
+                (int)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+        if(fgColorRadioBtn.isSelected()){
+            textArea.setForeground(new Color((int)aInputTextBox.getValue(),
+                (int)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+    }//GEN-LAST:event_aSliderStateChanged
+
+    private void aInputTextBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_aInputTextBoxStateChanged
         aSlider.setValue((int) aInputTextBox.getValue());
         bSlider.setValue((int) bInputTextBox.getValue());
         cSlider.setValue((int) cInputTextBox.getValue());
         if(bgColorRadioBtn.isSelected()){
             colorLabel.setBackground(new Color((int)aInputTextBox.getValue(),
-                    (int)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+                (int)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+        if(fgColorRadioBtn.isSelected()){
+            textArea.setForeground(new Color((int)aInputTextBox.getValue(),
+                (int)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+    }//GEN-LAST:event_aInputTextBoxStateChanged
+
+    private void fgColorRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fgColorRadioBtnActionPerformed
+        aInputTextBox.setValue(aSlider.getValue());
+        bInputTextBox.setValue(bSlider.getValue());
+        cInputTextBox.setValue(cSlider.getValue());
+        
+        if(bgColorRadioBtn.isSelected()){
+            colorLabel.setBackground(new Color((Integer)aInputTextBox.getValue(),
+                    (Integer)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
         }
         if(fgColorRadioBtn.isSelected()){
             textArea.setForeground(new Color((Integer)aInputTextBox.getValue(),
                     (Integer)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
         }
-    }//GEN-LAST:event_aInputTextBoxPropertyChange
+    }//GEN-LAST:event_fgColorRadioBtnActionPerformed
+
+    private void bInputTextBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_bInputTextBoxStateChanged
+        aSlider.setValue((int) aInputTextBox.getValue());
+        bSlider.setValue((int) bInputTextBox.getValue());
+        cSlider.setValue((int) cInputTextBox.getValue());
+        if(bgColorRadioBtn.isSelected()){
+            colorLabel.setBackground(new Color((int)aInputTextBox.getValue(),
+                (int)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+        if(fgColorRadioBtn.isSelected()){
+            textArea.setForeground(new Color((int)aInputTextBox.getValue(),
+                (int)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+    }//GEN-LAST:event_bInputTextBoxStateChanged
+
+    private void cInputTextBoxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cInputTextBoxStateChanged
+        aSlider.setValue((int) aInputTextBox.getValue());
+        bSlider.setValue((int) bInputTextBox.getValue());
+        cSlider.setValue((int) cInputTextBox.getValue());
+        if(bgColorRadioBtn.isSelected()){
+            colorLabel.setBackground(new Color((int)aInputTextBox.getValue(),
+                (int)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+        if(fgColorRadioBtn.isSelected()){
+            textArea.setForeground(new Color((int)aInputTextBox.getValue(),
+                (int)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+    }//GEN-LAST:event_cInputTextBoxStateChanged
 
     /**
      * @param args the command line arguments
@@ -329,10 +408,8 @@ public class ColorCodeApp extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ColorCodeApp().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ColorCodeApp().setVisible(true);
         });
     }
 
@@ -348,11 +425,11 @@ public class ColorCodeApp extends javax.swing.JFrame {
     private javax.swing.JSlider cSlider;
     private javax.swing.JLabel cSliderLabel;
     private javax.swing.JLabel colorLabel;
+    private javax.swing.JButton copyBtn;
     private javax.swing.JRadioButton fgColorRadioBtn;
     private javax.swing.JLabel jLabelA;
     private javax.swing.JLabel jLabelB;
     private javax.swing.JLabel jLabelC;
-    private javax.swing.JButton okayResetButton;
     private javax.swing.JPanel panel;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTextArea textArea;

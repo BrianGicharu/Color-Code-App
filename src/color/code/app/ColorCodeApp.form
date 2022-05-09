@@ -53,7 +53,7 @@
                                       <Component id="bSliderLabel" alignment="0" pref="34" max="32767" attributes="0"/>
                                       <Component id="aSliderLabel" alignment="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="93" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="81" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -79,7 +79,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="cInputTextBox" min="-2" pref="59" max="-2" attributes="0"/>
                                   <EmptySpace pref="44" max="32767" attributes="0"/>
-                                  <Component id="okayResetButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="copyBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -120,7 +120,7 @@
                       <Component id="aInputTextBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cInputTextBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bInputTextBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="okayResetButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="copyBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -171,17 +171,23 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelC">
           <Properties>
-            <Property name="text" type="java.lang.String" value="B"/>
+            <Property name="text" type="java.lang.String" value="C"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="aInputTextBox">
           <Events>
-            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="aInputTextBoxPropertyChange"/>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="aInputTextBoxStateChanged"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="bInputTextBox">
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="bInputTextBoxStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="cInputTextBox">
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="cInputTextBoxStateChanged"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="bgColorRadioBtn">
           <Properties>
@@ -195,6 +201,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="ForeGround Color"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fgColorRadioBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="colorLabel">
           <Properties>
@@ -272,12 +281,13 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="okayResetButton">
+        <Component class="javax.swing.JButton" name="copyBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="OK"/>
+            <Property name="text" type="java.lang.String" value="COPY"/>
+            <Property name="actionCommand" type="java.lang.String" value="COPY"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="okayResetButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="copyBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
