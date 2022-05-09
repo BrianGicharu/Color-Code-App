@@ -5,6 +5,8 @@
  */
 package color.code.app;
 
+import java.awt.Color;
+
 /**
  *
  * @author user
@@ -27,8 +29,7 @@ public class ColorCodeApp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jPanel1 = new javax.swing.JPanel();
+        panel = new javax.swing.JPanel();
         jLabelB = new javax.swing.JLabel();
         jLabelA = new javax.swing.JLabel();
         jLabelC = new javax.swing.JLabel();
@@ -38,15 +39,29 @@ public class ColorCodeApp extends javax.swing.JFrame {
         bgColorRadioBtn = new javax.swing.JRadioButton();
         fgColorRadioBtn = new javax.swing.JRadioButton();
         colorLabel = new javax.swing.JLabel();
-        colorLabel1 = new javax.swing.JLabel();
+        aSlider = new javax.swing.JSlider();
+        bSlider = new javax.swing.JSlider();
+        cSlider = new javax.swing.JSlider();
+        bSliderLabel = new javax.swing.JLabel();
+        aSliderLabel = new javax.swing.JLabel();
+        cSliderLabel = new javax.swing.JLabel();
+        scrollPane = new javax.swing.JScrollPane();
+        textArea = new javax.swing.JTextArea();
+        okayResetButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabelB.setText("B");
+        jLabelB.setText("G");
 
-        jLabelA.setText("A");
+        jLabelA.setText("R");
 
-        jLabelC.setText("C");
+        jLabelC.setText("B");
+
+        aInputTextBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                aInputTextBoxPropertyChange(evt);
+            }
+        });
 
         bgColorRadioBtn.setText("BackGround Color");
         bgColorRadioBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -58,64 +73,145 @@ public class ColorCodeApp extends javax.swing.JFrame {
         fgColorRadioBtn.setText("ForeGround Color");
 
         colorLabel.setBackground(new java.awt.Color(255, 255, 255));
+        colorLabel.setOpaque(true);
 
-        colorLabel1.setBackground(new java.awt.Color(240, 240, 0));
+        aSlider.setMaximum(255);
+        aSlider.setPaintTicks(true);
+        aSlider.setValue(0);
+        aSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                aSliderStateChanged(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fgColorRadioBtn)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(aInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelB, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(bgColorRadioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabelC, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(77, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        bSlider.setMaximum(255);
+        bSlider.setPaintTicks(true);
+        bSlider.setValue(0);
+        bSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                bSliderStateChanged(evt);
+            }
+        });
+
+        cSlider.setMaximum(255);
+        cSlider.setPaintTicks(true);
+        cSlider.setValue(0);
+        cSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                cSliderStateChanged(evt);
+            }
+        });
+
+        bSliderLabel.setText("G");
+
+        aSliderLabel.setText("R");
+
+        cSliderLabel.setText("B");
+
+        textArea.setEditable(false);
+        textArea.setColumns(20);
+        textArea.setFont(new java.awt.Font("Monotype Corsiva", 1, 13)); // NOI18N
+        textArea.setLineWrap(true);
+        textArea.setRows(5);
+        textArea.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"");
+        textArea.setToolTipText("");
+        textArea.setWrapStyleWord(true);
+        scrollPane.setViewportView(textArea);
+
+        okayResetButton.setText("OK");
+        okayResetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okayResetButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(colorLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(colorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cSliderLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(bSliderLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                                    .addComponent(aSliderLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 93, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(aInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)))
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(aSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                    .addComponent(bSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(42, 42, 42))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(jLabelB, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelC, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                .addComponent(okayResetButton)
+                                .addContainerGap())))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bgColorRadioBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(colorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(fgColorRadioBtn)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(scrollPane))
+                        .addContainerGap())))
+            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelLayout.createSequentialGroup()
                     .addGap(34, 34, 34)
                     .addComponent(jLabelA, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(347, Short.MAX_VALUE)))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelC, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelB, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(aInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bInputTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(okayResetButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bgColorRadioBtn)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aSliderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(aSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fgColorRadioBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(colorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(colorLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bSliderLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cSliderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fgColorRadioBtn)
+                    .addComponent(bgColorRadioBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(colorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelLayout.createSequentialGroup()
                     .addGap(21, 21, 21)
                     .addComponent(jLabelA, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(256, Short.MAX_VALUE)))
@@ -125,11 +221,14 @@ public class ColorCodeApp extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -138,6 +237,69 @@ public class ColorCodeApp extends javax.swing.JFrame {
     private void bgColorRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bgColorRadioBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bgColorRadioBtnActionPerformed
+
+    private void okayResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okayResetButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_okayResetButtonActionPerformed
+
+    private void aSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_aSliderStateChanged
+        aInputTextBox.setValue(aSlider.getValue());
+        bInputTextBox.setValue(bSlider.getValue());
+        cInputTextBox.setValue(cSlider.getValue());
+        
+        if(bgColorRadioBtn.isSelected()){
+            colorLabel.setBackground(new Color((Integer)aInputTextBox.getValue(),
+                    (Integer)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+        if(fgColorRadioBtn.isSelected()){
+            textArea.setForeground(new Color((Integer)aInputTextBox.getValue(),
+                    (Integer)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+    }//GEN-LAST:event_aSliderStateChanged
+
+    private void bSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_bSliderStateChanged
+        aInputTextBox.setValue(aSlider.getValue());
+        bInputTextBox.setValue(bSlider.getValue());
+        cInputTextBox.setValue(cSlider.getValue());
+        
+        if(bgColorRadioBtn.isSelected()){
+            colorLabel.setBackground(new Color((Integer)aInputTextBox.getValue(),
+                    (Integer)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+        if(fgColorRadioBtn.isSelected()){
+            textArea.setForeground(new Color((Integer)aInputTextBox.getValue(),
+                    (Integer)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+    }//GEN-LAST:event_bSliderStateChanged
+
+    private void cSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_cSliderStateChanged
+        aInputTextBox.setValue(aSlider.getValue());
+        bInputTextBox.setValue(bSlider.getValue());
+        cInputTextBox.setValue(cSlider.getValue());
+        
+        if(bgColorRadioBtn.isSelected()){
+            colorLabel.setBackground(new Color((Integer)aInputTextBox.getValue(),
+                    (Integer)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+        if(fgColorRadioBtn.isSelected()){
+            textArea.setForeground(new Color((Integer)aInputTextBox.getValue(),
+                    (Integer)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+    }//GEN-LAST:event_cSliderStateChanged
+
+    private void aInputTextBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_aInputTextBoxPropertyChange
+        aSlider.setValue((int) aInputTextBox.getValue());
+        bSlider.setValue((int) bInputTextBox.getValue());
+        cSlider.setValue((int) cInputTextBox.getValue());
+        if(bgColorRadioBtn.isSelected()){
+            colorLabel.setBackground(new Color((int)aInputTextBox.getValue(),
+                    (int)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+        if(fgColorRadioBtn.isSelected()){
+            textArea.setForeground(new Color((Integer)aInputTextBox.getValue(),
+                    (Integer)bInputTextBox.getValue(),(int)cInputTextBox.getValue()));
+        }
+    }//GEN-LAST:event_aInputTextBoxPropertyChange
 
     /**
      * @param args the command line arguments
@@ -176,16 +338,23 @@ public class ColorCodeApp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner aInputTextBox;
+    private javax.swing.JSlider aSlider;
+    private javax.swing.JLabel aSliderLabel;
     private javax.swing.JSpinner bInputTextBox;
+    private javax.swing.JSlider bSlider;
+    private javax.swing.JLabel bSliderLabel;
     private javax.swing.JRadioButton bgColorRadioBtn;
     private javax.swing.JSpinner cInputTextBox;
+    private javax.swing.JSlider cSlider;
+    private javax.swing.JLabel cSliderLabel;
     private javax.swing.JLabel colorLabel;
-    private javax.swing.JLabel colorLabel1;
     private javax.swing.JRadioButton fgColorRadioBtn;
     private javax.swing.JLabel jLabelA;
     private javax.swing.JLabel jLabelB;
     private javax.swing.JLabel jLabelC;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JButton okayResetButton;
+    private javax.swing.JPanel panel;
+    private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
 }
